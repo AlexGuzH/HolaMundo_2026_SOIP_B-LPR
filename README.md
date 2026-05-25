@@ -73,3 +73,23 @@ Change the ENDPOINT_PHP variable in alpr_pi.py to target your online server, and
 [ ] Real-Time Push: Upgrade the Frontend architecture from HTTP short polling to persistent WebSockets (Node.js/Ratchet) for instant (<50ms) server-push alerts.
 
 [ ] Runtime Export: Compile the .pt weights into ONNX Runtime and Intel OpenVINO layouts to scale up raw FPS performance.
+
+
+# 🔍 Solución de Problemas Comunes (Troubleshooting)
+* ModuleNotFoundError: No module named 'cv2'
+
+Causa: El entorno virtual no está activo o instalaste las librerías fuera de él.
+
+Solución: Ejecuta source alpr_env/bin/activate (o su equivalente en Windows) y verifica con which python o where python que estás apuntando a la carpeta del proyecto.
+
+* ImportError: libGL.so.1: cannot open shared object file
+
+Causa: Común en Linux/Raspberry Pi. Faltan los enlaces del sistema para renderizar gráficos con OpenGL.
+
+Solución: Corre sudo apt install -y libgl1.
+
+* La ventana de video se abre pero se queda en negro o congela
+
+Causa: Otro programa está usando la cámara web (Zoom, Teams, FaceTime) o el índice de la cámara en cv2.VideoCapture(0) es incorrecto.
+
+Solución: Cierra aplicaciones que compitan por el periférico o intenta cambiar el índice a 1 o 2 (cv2.VideoCapture(1)).
