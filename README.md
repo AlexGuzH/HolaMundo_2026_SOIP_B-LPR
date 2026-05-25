@@ -35,3 +35,41 @@ An advanced, high-fidelity **Automatic License Plate Recognition (ALPR / LPR)** 
 │   └── fetch.php          # Non-cached database reader with strict anti-cache HTTP headers
 └── frontend/
     └── index.html         # Live monitoring dashboard with interactive visual theft alerts
+```
+
+# 🚀 Quick Start Guide
+### 1. Backend & Database Setup
+Import the following schema into your MySQL server:
+
+```SQL
+CREATE TABLE catalogo_robos (id INT AUTO_INCREMENT PRIMARY KEY, plate VARCHAR(15) NOT NULL UNIQUE);
+CREATE TABLE lecturas (id INT AUTO_INCREMENT PRIMARY KEY, plate VARCHAR(15) NOT NULL, fecha_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP, es_robo BOOLEAN DEFAULT FALSE);
+```
+2. Place api2.php and fetch.php inside your web hosting public directory and configure your database credentials.
+
+### 2. Edge Device Installation (Raspberry Pi 5)
+Ensure your system packages are updated and install vital graphic system dependencies:
+```bash
+sudo apt update && sudo apt install -y libgl1 libglib2.0-0
+```
+Set up a isolated Python Environment (PEP 668 compliance):
+
+```bash
+python3 -m venv alpr_env
+source alpr_env/bin/activate
+pip install opencv-python ultralytics easyocr requests
+```
+
+### 3. Execution
+Change the ENDPOINT_PHP variable in alpr_pi.py to target your online server, and run the system:
+```bash
+# Force the system to use the local environment's explicit binary bin path
+./alpr_env/bin/python alpr_pi.py
+```
+
+🗺️ Roadmap & Future Enhancements
+[ ] Hardware Acceleration: Integrate the Raspberry Pi AI Kit (Hailo-8L NPU) via PCIe to run model inference completely off-CPU.
+
+[ ] Real-Time Push: Upgrade the Frontend architecture from HTTP short polling to persistent WebSockets (Node.js/Ratchet) for instant (<50ms) server-push alerts.
+
+[ ] Runtime Export: Compile the .pt weights into ONNX Runtime and Intel OpenVINO layouts to scale up raw FPS performance.
