@@ -1,0 +1,37 @@
+# =========================================================
+# .gitignore Personalizado - Sistema ALPR / LPR
+# =========================================================
+
+# --- Modelos y Pesos de Redes Neuronales (Muy Pesados) ---
+# Evita que GitHub rechace el commit por superar el límite de 100MB
+*.pt
+*.pth
+*.onnx
+app/yolo26n.pt
+
+# --- Entornos Virtuales de Python ---
+# Cada máquina (Mac/Pi) debe compilar su propio entorno local
+alpr_env/
+venv/
+env/
+
+# --- Archivos Locales Temporales o de Pruebas ---
+app/file.txt
+*.log
+
+# --- Caché de Ejecución de Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Archivos Basura del Sistema Operativo ---
+# Muy común al desarrollar o probar en Mac
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+
+# --- Configuraciones del Editor (VS Code / PyCharm) ---
+.vscode/
+.idea/
