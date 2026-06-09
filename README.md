@@ -169,6 +169,23 @@ El entrenamiento del modelo maestro en la nube arrojó métricas estadísticas c
 * Sensibilidad (Recall): 89.1% (Eficacia del localizador para evitar omisiones de vehículos en movimiento).
 * mAP@50 (Mean Average Precision): 91.4% (Área total bajo la curva de balance de fidelidad del modelo).
 
+# 🧪 Pruebas Automatizadas y de Calidad de Software
+
+El sistema cuenta con una suite completa de pruebas unitarias e integración que validan los flujos críticos del pipeline (sintaxis alfanumérica, algoritmos vectoriales de distancia y simulación de respuestas de la API REST) sin requerir hardware de cámara activo.
+
+### Ejecución de las Pruebas
+
+Asegúrate de tener el entorno virtual activo antes de arrancar los casos de prueba:
+
+```bash
+# 1. Activar el entorno virtual si no lo está
+source alpr_env/bin/activate  # En macOS/Linux
+.\alpr_env\Scripts\activate   # En Windows
+
+# 2. Ejecutar la suite automatizada nativa
+python -m unittest tests_alpr.py -v
+```
+
 # ⚠️ Limitaciones Conocidas
 1.- Ausencia de Aceleración de Hardware en ARM: Al ejecutar YOLOv8 en modo CPU pura dentro de la Raspberry Pi 5, el procesador se ve sometido a un alto estrés térmico, requiriendo disipación activa obligatoria para evitar degradación de FPS.<br>
 2.- Ambigüedad en Caracteres Similares: Bajo condiciones extremas de oscuridad o ángulos agudos, el motor OCR general puede confundir caracteres de morfología similar (como el número 0 con la letra O).<br>
